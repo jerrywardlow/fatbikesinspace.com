@@ -10,3 +10,12 @@ provider "dns" {
         key_secret = "${var.fb_key_secret}"
     }
 }
+
+resource "dns_a_record_set" "www" {
+    zone = "fatbikesinspace.com"
+    name = "www"
+    addresses = [
+        "107.180.57.118"
+    ]
+    ttl = 3600
+}
