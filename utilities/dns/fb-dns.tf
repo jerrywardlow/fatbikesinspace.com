@@ -1,13 +1,16 @@
-variable "fb_key_name" {}
-variable "fb_key_algorithm" {}
-variable "fb_key_secret" {}
+data "external" "lpass" {
+    query = {
+        project = "Fatbikes-In-Space"
+    }
+    program = ["bash", "${path.module}/lpass-scrape.sh"]
+}
 
 provider "dns" {
     update {
         server = "72.167.238.111"
-        key_name = "${var.fb_key_name}"
-        key_algorithm = "${var.fb_key_algorithm}"
-        key_secret = "${var.fb_key_secret}"
+        key_name = "${var.key_name}"
+        key_algorithm = "${var.key_algorithm}"
+        key_secret = "${var.key_secret}"
     }
 }
 
